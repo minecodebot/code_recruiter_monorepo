@@ -10,14 +10,14 @@ db.createUser({
 })
 
 
-db = db.getSiblingDB('recruiterUser_provider')
-print(db.getName())
-print(db.getMongo())
-db.createUser({
-  user: 'api_user',
-  pwd: 'api_user_password',
-  roles: [{role: 'readWrite', db: 'recruiterUser_provider'}]
-})
+// db = db.getSiblingDB('recruiterUser_provider')
+// print(db.getName())
+// print(db.getMongo())
+// db.createUser({
+//   user: 'api_user',
+//   pwd: 'api_user_password',
+//   roles: [{role: 'readWrite', db: 'recruiterUser_provider'}]
+// })
 
 
 print('End of creation of databases')

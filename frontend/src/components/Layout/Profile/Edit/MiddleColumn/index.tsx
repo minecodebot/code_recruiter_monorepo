@@ -16,7 +16,7 @@ const MiddleColumn: React.FC<Props> = ({ me }) => {
       ) : (
         <Row className="actions">
           <ProfilePanelEdit
-            id={me._id}
+            email={me.email}
             name={me.name}
             surname={me.surname}
             company={me.company}

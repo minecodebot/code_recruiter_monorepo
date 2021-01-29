@@ -11,6 +11,8 @@ export interface Props {
 }
 
 const RightColumn: React.FC<Props> = ({ me }) => {
+  console.log('me')
+  console.log(me)
   return (
     <Container className="left-column">
       {me === undefined ? (

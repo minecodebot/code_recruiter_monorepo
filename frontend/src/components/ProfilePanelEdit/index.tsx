@@ -10,7 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { userLogin } from '../../store/actions/users'
 
 export interface Props {
-  id: string
+  email: string
   name: string
   surname: string
   company: string
@@ -37,7 +37,7 @@ export interface Props {
 }
 
 const ProfilePanelEdit: React.FC<Props> = ({
-  id,
+  email,
   name,
   surname,
   company,
@@ -91,7 +91,7 @@ const ProfilePanelEdit: React.FC<Props> = ({
 
   const handleSubmit = async event => {
     event.preventDefault();
-    await api.put(`http://localhost:3030/users/${id}`, {
+    await api.put(`http://localhost:3030/users/${email}`, {
       avatar: me.avatar,
       name: me.name,
       surname: me.surname,
