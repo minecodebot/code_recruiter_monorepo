@@ -1,0 +1,53 @@
+version: "3.7"
+services:
+  code_recruiter_mongodb:
+    container_name: code_recruiter_mongodb
+    hostname: code_recruiter_mongodb
+    image : mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+      MONGO_INITDB_DATABASE: recruiterUser
+    volumes:
+      - ./database/initdb.js:/docker-entrypoint-initdb.d/initdb.js:ro
+      - ./database/data:/data/db
+    ports:
+      - 27017:27017
+    restart: always
+  code_recruiter_backend:
+    depends_on:
+      - code_recruiter_mongodb
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    container_name: code_recruiter_backend
+    hostname: code_recruiter_backend
+    env_file: ./backend/.env
+    volumes:
+        - ./backend:/usr/src/app/backend
+        - /usr/src/app/backend/node_modules
+    ports:
+      - 3030:3030
+    environment:
+      WAIT_HOSTS: code_recruiter_mongodb:27017
+    links:
+      - code_recruiter_mongodb
+  code_recruiter_frontend:
+    depends_on:
+      - code_recruiter_backend
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    container_name: code_recruiter_frontend
+    hostname: code_recruiter_frontend
+    env_file:  ./frontend/.env
+    volumes:
+        - ./frontend:/usr/src/app/frontend
+        - /usr/src/app/frontend/node_modules
+        - /usr/src/app/frontend/.next
+    ports:
+      - 3000:3000
+    environment:
+      WAIT_HOSTS: code_recruiter_backend:3030
+    links:
+      - code_recruiter_backend
