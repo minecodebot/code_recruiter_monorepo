@@ -14,47 +14,39 @@ import { useRouter } from 'next/router'
 import { userInterface, trainingInterface, postInterface } from '../Interface'
 import { useSession } from 'next-auth/client'
 import { useSelector } from "react-redux";
+import { storeWrapper } from "./../../store";
+import { useFetch } from '../../hooks/useFetch'
 
 export interface Props {
+  session: {
+    user: userInterface
+  }
   isLoading: boolean
   trainings?: trainingInterface[]
   posts?: postInterface[]
   user?: userInterface
 }
 
-const Layout: React.FC<Props> = ({ isLoading, trainings, posts, user }) => {
+const Layout: React.FC<Props> = ({ session, isLoading, trainings, posts, user }) => {
   const router = useRouter()
-  const [ session ] = useSession()
-
-  const me = useSelector((state) => state.user);
 
   return (
     <Container>
-      <DesktopHeader me={me} />
+      <DesktopHeader/>
 
       <span>{!isLoading && <AdBanner />}</span>
 
       <main>
-        {router.pathname === '/' ? (
-          <>
-            <HomeLeftColumn posts={posts} />
-            {session && <HomeRightColumn me={me} />}
-          </>
-        ) : session ? router.pathname === '/exams' ? (
-          <ExamsMiddleColumn me={me} />
-        ) : router.pathname === '/trainings' ? (
-          <TrainingsMiddleColumn me={me} trainings={trainings} />
-        ) : router.pathname.includes('/trainings/code') ? (
-          <TrainingsCodeMiddleColumn trainings={trainings} />
-        ) : router.pathname === '/profile/me' ? (
-          <ProfileMeMiddleColumn me={me} />
-        ) : router.pathname === '/profile/edit' ? (
-          <ProfileEditMiddleColumn me={me} />
-        ) : router.pathname.includes('/profile/user/') ? (
-          <ProfileIdMiddleColumn user={user}/>
-        ) : (
-          <></>
-        ) : <></>}
+        {router.pathname === '/' && <HomeLeftColumn posts={posts} />}
+        {session !== null ? <>
+          {router.pathname === '/' && <HomeRightColumn />}
+          {router.pathname === '/exams' && <ExamsMiddleColumn />}
+          {router.pathname === '/trainings' && <TrainingsMiddleColumn trainings={trainings} />}
+          {router.pathname.includes('/trainings/code') && <TrainingsCodeMiddleColumn trainings={trainings} />}
+          {router.pathname === '/profile/me' && <ProfileMeMiddleColumn />}
+          {router.pathname === '/profile/edit' && <ProfileEditMiddleColumn />}
+          {router.pathname.includes('/profile/user/') && <ProfileIdMiddleColumn user={user}/>}
+        </> : <></>}
       </main>
     </Container>
   )

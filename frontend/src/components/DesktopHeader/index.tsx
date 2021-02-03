@@ -11,14 +11,14 @@ import Avatar from 'avataaars'
 import LoadingDesktopHeader from '../Shimmer/LoadingDesktopHeader'
 import { userInterface } from '../Interface'
 import { useSession, signIn, signOut } from 'next-auth/client'
+import { useFetch } from '../../hooks/useFetch'
 
-export interface Props {
-  me: userInterface
-}
-
-const Header: React.FC<Props> = ({ me }) => {
+const Header: React.FC = () => {
   const router = useRouter()
   const [ session ] = useSession()
+
+  const { data } = useFetch<userInterface>(`users/${session?.user.email}`)
+  const me = data
 
   const handleSignin = (e) => {
     e.preventDefault()
@@ -43,7 +43,7 @@ const Header: React.FC<Props> = ({ me }) => {
           >
             <LinkedInIcon />
           </div>
-          {session &&
+          {session ?
           <div className="right">
             <nav>
               <button
@@ -88,8 +88,7 @@ const Header: React.FC<Props> = ({ me }) => {
               </button>
               <a href="#" onClick={handleSignout} className="btn-signin">Sign out</a>
             </nav>
-          </div> }
-          {!session && <>Not signed in <br/><a href="#" onClick={handleSignin}  className="btn-signin">Sign in</a></>}
+          </div> : <>Not signed in <br/><a href="#" onClick={handleSignin}  className="btn-signin">Sign in</a></>}
         </Wrapper>
       )}
     </Container>

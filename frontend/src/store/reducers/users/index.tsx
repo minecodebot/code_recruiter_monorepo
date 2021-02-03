@@ -33,8 +33,7 @@ const reducer = (state = initialState, action) => {
     case HYDRATE:
       return { ...state, ...action.payload.user };
     case USER_LOGIN:
-      const newState = { ...state, ...action.payload };
-      return newState;
+      return { ...state, ...action.payload };
     case USER_RESET:
       return initialState;
     default:

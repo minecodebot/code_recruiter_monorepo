@@ -6,16 +6,18 @@ import TrainingPanel from '../../../TrainingPanel'
 import { Container } from './styles'
 import LoadingExamTrainingPanel from '../../../Shimmer/LoadingExamTrainingPanel'
 import { userInterface } from '../../../Interface'
-export interface Props {
-  me: userInterface
-}
+import { useFetch } from '../../../../hooks/useFetch'
+import { useSession } from 'next-auth/client'
 
-const RightColumn: React.FC<Props> = ({ me }) => {
-  console.log('me')
-  console.log(me)
+const RightColumn: React.FC = () => {
+  const [ session ] = useSession()
+
+  const { data } = useFetch<userInterface>(`users/${session?.user.email}`)
+  const me = data
+
   return (
     <Container className="left-column">
-      {me === undefined ? (
+      {me === undefined || me === null ? (
         <>
           <LoadingProfilePanel />
           <LoadingExamTrainingPanel />

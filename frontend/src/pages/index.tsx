@@ -21,12 +21,13 @@ const Home: React.FC<Props> = ({ posts }) => {
     dispatch(userLogin(session.user))
   }
 
+
   return (
     <>
       <Head>
         <title>Job Search Plataform</title>
       </Head>
-      <Layout isLoading={isFallback} posts={posts} />
+      <Layout session={session} isLoading={isFallback} posts={posts} />
     </>
   )
 }

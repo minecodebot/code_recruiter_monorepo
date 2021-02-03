@@ -67,34 +67,43 @@ const UserSchema = mongoose.Schema({
     },
     jobTitle: {
         type: String,
+        default: ''
     },
     company: {
         type: String,
+        default: ''
     },
     carrerPath: {
         type: String,
+        default: ''
     },
     jobSituation: {
         type: String,
+        default: ''
     },
     presentationLetter: {
         type: String,
+        default: ''
     },
     competences: {
-        type: [Number]
+        type: [Number],
+        default: []
     },
     completedTrainings: {
-        type: [Number]
+        type: [Number],
+        default: []
     },
     suggestedTrainings: {
-        type: [Number]
+        type: [Number],
+        default: []
     },
     exams: {
-        type: [Number]
+        type: [Number],
+        default: []
     },
     avatar: {
         type: AvatarSchema,
-        default: {}
+        default: () => ({})
     }
 })
 

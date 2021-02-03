@@ -3,15 +3,17 @@ import LoadingProfilePanel from '../../../../Shimmer/LoadingProfilePanel'
 import ProfilePanelEdit from '../../../../ProfilePanelEdit'
 import { Container, Row } from './styles'
 import { userInterface } from '../../../../Interface'
+import { useFetch } from '../../../../../hooks/useFetch'
+import { useSession } from 'next-auth/client'
 
-export interface Props {
-  me: userInterface
-}
+const MiddleColumn: React.FC = () => {
+  const [ session ] = useSession()
 
-const MiddleColumn: React.FC<Props> = ({ me }) => {
+  const { data } = useFetch<userInterface>(`users/${session?.user.email}`)
+  const me = data
   return (
     <Container className="middle-column">
-      {me === undefined ? (
+      {me === undefined || me === null ? (
         <LoadingProfilePanel />
       ) : (
         <Row className="actions">
