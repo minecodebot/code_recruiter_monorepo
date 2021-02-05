@@ -10,7 +10,7 @@ services:
       MONGO_INITDB_DATABASE: recruiterUser
     volumes:
       - ./database/initdb.js:/docker-entrypoint-initdb.d/initdb.js:ro
-      - ./database/data:/data/db
+    #  - ./database/data:/data/db
     ports:
       - 27017:27017
     restart: always
@@ -30,6 +30,9 @@ services:
       - 3030:3030
     environment:
       WAIT_HOSTS: code_recruiter_mongodb:27017
+      WAIT_HOSTS_TIMEOUT: 60
+      WAIT_BEFORE_HOSTS: 15
+      WAIT_SLEEP_INTERVAL: 5
     links:
       - code_recruiter_mongodb
   code_recruiter_frontend:
@@ -49,5 +52,10 @@ services:
       - 3000:3000
     environment:
       WAIT_HOSTS: code_recruiter_backend:3030
+      WAIT_HOSTS_TIMEOUT: 60
+      WAIT_BEFORE_HOSTS: 15
+      WAIT_SLEEP_INTERVAL: 5
     links:
       - code_recruiter_backend
+# volumes:
+#   mongodata:
