@@ -10,7 +10,6 @@
     GITHUB_ID=fd7dc68ef91160f08827
     GITHUB_SECRET=efb15653dd78c2da7a26447d9767d10e8cd96f5a
     NEXTAUTH_URL=http://localhost:3000
-    NEXT_PUBLIC_DATABASE_URL="mongodb://api_user:api_user_password@code_recruiter_mongodb:27017/recruiterUser_provider"
   ```
   * backend/:
   ```{}
