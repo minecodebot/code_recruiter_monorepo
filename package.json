@@ -1,0 +1,23 @@
+{
+  "name": "code_recruiter_monorepo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/minecodebot/code_recruiter_monorepo.git",
+  "author": "minecodebot <minecode.geral@gmail.com>",
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "eclint": "^2.8.1",
+    "editorconfig": "^0.15.3",
+    "typescript": "^4.1.3"
+  },
+  "scripts": {
+    "eslint": "eslint */**/*.{js,ts,tsx} --fix",
+    "eclint": "eclint fix */**/*"
+  }
+}
