@@ -6,7 +6,7 @@ ENV PORT 3030
 WORKDIR /usr/src/app/backend
 
 # Install dep
-COPY package.json ./
+COPY package*.json ./
 RUN yarn
 
 # Copy source files

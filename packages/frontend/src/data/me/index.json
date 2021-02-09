@@ -28,7 +28,8 @@
     "Competence 5",
     "Competence 6"
   ],
-  "completedTrainings": [{
+  "completedTrainings": [
+    {
       "id": 7,
       "title": "Training Title 7",
       "level": "level"
@@ -44,7 +45,8 @@
       "level": "level"
     }
   ],
-  "suggestedTrainings": [{
+  "suggestedTrainings": [
+    {
       "id": 4,
       "title": "Training Title 4",
       "level": "level"
@@ -60,7 +62,8 @@
       "level": "level"
     }
   ],
-  "exams": [{
+  "exams": [
+    {
       "title": "Exam Title 1",
       "description": "Some text here",
       "date": "12/10/2020",

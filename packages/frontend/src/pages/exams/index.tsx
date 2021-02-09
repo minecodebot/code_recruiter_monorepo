@@ -1,7 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
-import LayoutExams from '../../components/Layout'
 import { useRouter } from 'next/router'
+import LayoutExams from '../../components/Layout'
 
 const Trainings: React.FC = () => {
   const { isFallback } = useRouter()

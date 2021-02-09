@@ -9,7 +9,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: rootpassword
       MONGO_INITDB_DATABASE: recruiterUser
     volumes:
-      - ./packages/database/initdb.js:/docker-entrypoint-initdb.d/initdb.js:ro
+      - ./packages/database/initdb.js:/docker-entrypoint-initdb.d/initdb.js
     ports:
       - 27017:27017
     restart: always
@@ -18,7 +18,7 @@ services:
       - code_recruiter_mongodb
     build:
       context: ./packages/backend
-      dockerfile: ./Dockerfile
+      dockerfile: Dockerfile
     container_name: code_recruiter_backend
     hostname: code_recruiter_backend
     env_file: ./packages/backend/.env
@@ -38,15 +38,14 @@ services:
     depends_on:
       - code_recruiter_backend
     build:
-      context: ./packages/frontend
-      dockerfile: ./Dockerfile
+      context: packages/frontend
+      dockerfile: Dockerfile
     container_name: code_recruiter_frontend
     hostname: code_recruiter_frontend
-    env_file: ./packages/frontend/.env
+    env_file: packages/frontend/.env
     volumes:
-      - ./packages/frontend:/usr/src/app/frontend
-      - /usr/src/app/frontend/node_modules
-      - /usr/src/app/frontend/.next
+      - ./packages/backend:/usr/src/app/backend
+      - /usr/src/app/backend/node_modules
     ports:
       - 3000:3000
     environment:

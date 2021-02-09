@@ -9,46 +9,39 @@ export interface Props {
   trainings: trainingInterface[]
 }
 
-const TrainingPanel: React.FC<Props> = ({ title, trainings }) => {
-  return (
-    <Container>
-      <Panel>
-        <span className="title">{title} Trainings</span>
-        <ul>
-          {trainings ? (
-            trainings.map(item => {
-              return (
-                <li>
-                  <Row className="actions">
-                    <Column>
-                      <h3>{item.title}</h3>
-                      {title === 'Completed' ? (
-                        <></>
-                      ) : (
-                        <span className="subtext">{item.level}</span>
-                      )}
-                    </Column>
-                    <Column>
-                      {title === 'Completed' ? (
-                        <span className="subtext">{item.level}</span>
-                      ) : (
-                        <Button
-                          type="training"
-                          url={`/training/code/${item.id}`}
-                        />
-                      )}
-                    </Column>
-                  </Row>
-                </li>
-              )
-            })
-          ) : (
-            <></>
-          )}
-        </ul>
-      </Panel>
-    </Container>
-  )
-}
+const TrainingPanel: React.FC<Props> = ({ title, trainings }: Props) => (
+  <Container>
+    <Panel>
+      <span className='title'>{title} Trainings</span>
+      <ul>
+        {trainings ? (
+          trainings.map((item, index) => (
+            <li key={index}>
+              <Row className='actions'>
+                <Column>
+                  <h3>{item.title}</h3>
+                  {title === 'Completed' ? (
+                    <></>
+                  ) : (
+                    <span className='subtext'>{item.level}</span>
+                  )}
+                </Column>
+                <Column>
+                  {title === 'Completed' ? (
+                    <span className='subtext'>{item.level}</span>
+                  ) : (
+                    <Button type='training' url={`/training/code/${item.id}`} />
+                  )}
+                </Column>
+              </Row>
+            </li>
+          ))
+        ) : (
+          <></>
+        )}
+      </ul>
+    </Panel>
+  </Container>
+)
 
 export default TrainingPanel

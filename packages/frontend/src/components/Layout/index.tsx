@@ -1,4 +1,5 @@
 import React from 'react'
+import { useRouter } from 'next/router'
 import HomeLeftColumn from './Home/LeftColumn'
 import HomeRightColumn from './Home/RightColumn'
 import ExamsMiddleColumn from './Exams/MiddleColumn'
@@ -10,15 +11,10 @@ import ProfileEditMiddleColumn from './Profile/Edit/MiddleColumn'
 import DesktopHeader from '../DesktopHeader'
 import AdBanner from '../AdBanner'
 import { Container } from './styles'
-import { useRouter } from 'next/router'
 import { userInterface, trainingInterface, postInterface } from '../Interface'
-import { useSession } from 'next-auth/client'
-import { useSelector } from 'react-redux'
-import { storeWrapper } from './../../store'
-import { useFetch } from '../../hooks/useFetch'
 
 export interface Props {
-  session: {
+  session?: {
     user: userInterface
   }
   isLoading: boolean
@@ -33,7 +29,7 @@ const Layout: React.FC<Props> = ({
   trainings,
   posts,
   user
-}) => {
+}: Props) => {
   const router = useRouter()
 
   return (

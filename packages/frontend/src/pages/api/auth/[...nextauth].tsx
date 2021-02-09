@@ -13,7 +13,7 @@ const options = {
     })
   ],
   callbacks: {
-    signIn: async (user, account, profile) => {
+    signIn: async (profile: { email: string; name: string }) => {
       await api
         .get(`/users/${profile.email}`)
         .then(async response => {
@@ -27,34 +27,34 @@ const options = {
                 email: profile.email
               })
               .then(response2 => {
-                // console.log(response2)
+                console.log(response2)
               })
               .catch(error2 => {
-                // console.log(error2)
+                console.log(error2)
               })
           }
-          // console.log(response)
+          console.log(response)
         })
         .catch(error => {
-          // console.log(error)
+          console.log(error)
         })
       return Promise.resolve(true)
     },
-    session: async (session, user) => {
+    session: async (session: { user: string }, user: { email: string }) => {
       await api
         .get(`/users/${user.email}`)
         .then(response => {
           if (response.data !== null) {
             session.user = response.data
           }
-          // console.log(response)
+          console.log(response)
         })
         .catch(error => {
-          // console.log(error)
+          console.log(error)
         })
 
       return Promise.resolve(session)
     }
   }
 }
-export default (req, res) => NextAuth(req, res, options)
+export default (req: any, res: any) => NextAuth(req, res, options)

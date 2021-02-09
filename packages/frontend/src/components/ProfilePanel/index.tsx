@@ -1,6 +1,4 @@
 import React from 'react'
-import Panel from '../Panel'
-import { Container } from './styles'
 import Avatar from 'avataaars'
 import {
   uniqueNamesGenerator,
@@ -8,7 +6,9 @@ import {
   names,
   starWars
 } from 'unique-names-generator'
-import Link from 'next/link'
+import { Container } from './styles'
+import Panel from '../Panel'
+
 export interface Props {
   name: string
   surname: string
@@ -44,7 +44,7 @@ const ProfilePanel: React.FC<Props> = ({
   avatar,
   personalDataHidden,
   short
-}) => {
+}: Props) => {
   const config: Config = {
     dictionaries: [names, starWars],
     length: 2,
@@ -59,7 +59,7 @@ const ProfilePanel: React.FC<Props> = ({
   return (
     <Container>
       <Panel>
-        <div className="profile-cover"></div>
+        <div className='profile-cover' />
         <Avatar
           avatarStyle={avatar.avatarStyle}
           topType={avatar.topType}
@@ -80,7 +80,7 @@ const ProfilePanel: React.FC<Props> = ({
         />
         <h1>
           {name}
-          {surname.length > 0 ? ' ' + surname : ''}
+          {surname.length > 0 ? ` ${surname}` : ''}
         </h1>
         {personalDataHidden ? (
           <></>
@@ -90,26 +90,26 @@ const ProfilePanel: React.FC<Props> = ({
           </h2>
         )}
 
-        <div className="separator"></div>
+        <div className='separator' />
 
-        <div className="key-value">
-          <span className="key">Carrer path</span>
-          <span className="value">{carrerPath}</span>
+        <div className='key-value'>
+          <span className='key'>Carrer path</span>
+          <span className='value'>{carrerPath}</span>
         </div>
-        <div className="key-value">
-          <span className="key">Job Situation</span>
-          <span className="value">{jobSituation}</span>
+        <div className='key-value'>
+          <span className='key'>Job Situation</span>
+          <span className='value'>{jobSituation}</span>
         </div>
 
-        <div className="separator"></div>
+        <div className='separator' />
         {short ? (
           <></>
         ) : (
           <>
-            <div className="key-value">
-              <span className="key">Presentation Letter</span>
+            <div className='key-value'>
+              <span className='key'>Presentation Letter</span>
               {personalDataHidden ? (
-                <span className="value">Formal, Friendly</span>
+                <span className='value'>Formal, Friendly</span>
               ) : (
                 <></>
               )}
@@ -117,8 +117,8 @@ const ProfilePanel: React.FC<Props> = ({
             {personalDataHidden ? (
               <></>
             ) : (
-              <div className="key-value">
-                <span className="value">{presentationLetter}</span>
+              <div className='key-value'>
+                <span className='value'>{presentationLetter}</span>
               </div>
             )}
           </>

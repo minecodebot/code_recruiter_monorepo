@@ -1,16 +1,16 @@
 import React from 'react'
 import Head from 'next/head'
-import Layout from '../../components/Layout'
-import trainingsData from '../../data/trainings/index.json'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
+import Layout from '../../components/Layout'
+import trainingsData from '../../data/trainings/index.json'
 import { trainingInterface } from '../../components/Interface'
 
 export interface Props {
   trainings: trainingInterface[]
 }
 
-const Trainings: React.FC<Props> = ({ trainings }) => {
+const Trainings: React.FC<Props> = ({ trainings }: Props) => {
   const { isFallback } = useRouter()
 
   return (
@@ -25,11 +25,9 @@ const Trainings: React.FC<Props> = ({ trainings }) => {
 
 export default Trainings
 
-export const getStaticProps: GetStaticProps = async () => {
-  return {
-    props: {
-      trainings: trainingsData
-    },
-    revalidate: 20
-  }
-}
+export const getStaticProps: GetStaticProps = async () => ({
+  props: {
+    trainings: trainingsData
+  },
+  revalidate: 20
+})

@@ -8,15 +8,17 @@ export interface Props {
   trainings: trainingInterface[]
 }
 
-const MiddleColumn: React.FC<Props> = ({ trainings }) => {
+const MiddleColumn: React.FC<Props> = ({ trainings }: Props) => {
   return (
-    <Container className="middle-column">
+    <Container className='middle-column'>
       {trainings === undefined ? (
         <LoadingExamTrainingPanel />
       ) : trainings.length > 0 ? (
-        <Row className="actions">
-          <TrainingPanel title="All" trainings={trainings} />
-          </Row> : <p>No trainings found</p>
+        <Row className='actions'>
+          <TrainingPanel title='All' trainings={trainings} />
+        </Row>
+      ) : (
+        <p>No trainings found</p>
       )}
     </Container>
   )

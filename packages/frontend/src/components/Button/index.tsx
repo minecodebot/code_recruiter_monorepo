@@ -15,7 +15,7 @@ export interface Props {
   type: string
 }
 
-const Button: React.FC<Props> = ({ url, type }) => {
+const Button: React.FC<Props> = ({ url, type }: Props) => {
   const router = useRouter()
 
   const buttonType = (buttonType: string) => {

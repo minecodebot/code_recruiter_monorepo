@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import Panel from '../Panel'
 import { useRouter } from 'next/router'
-import { Container } from './styles'
-import Button from '../Button'
 import Avatar from 'avataaars'
 import Modal from 'react-modal'
+import { useDispatch } from 'react-redux'
+import Panel from '../Panel'
+import { Container } from './styles'
+import Button from '../Button'
 import api from '../../services/api'
-import { useSelector, useDispatch } from 'react-redux'
 import { userLogin } from '../../store/actions/users'
 
 export interface Props {
@@ -50,22 +50,22 @@ const ProfilePanelEdit: React.FC<Props> = ({
   completedTrainings,
   suggestedTrainings,
   exams
-}) => {
+}: Props) => {
   const router = useRouter()
 
   const [modalIsOpen, setIsOpen] = useState(false)
   const [me, setMe] = useState({
-    name: name,
-    surname: surname,
-    jobTitle: jobTitle,
-    company: company,
-    carrerPath: carrerPath,
-    jobSituation: jobSituation,
-    presentationLetter: presentationLetter,
-    competences: competences,
-    completedTrainings: completedTrainings,
-    suggestedTrainings: suggestedTrainings,
-    exams: exams,
+    name,
+    surname,
+    jobTitle,
+    company,
+    carrerPath,
+    jobSituation,
+    presentationLetter,
+    competences,
+    completedTrainings,
+    suggestedTrainings,
+    exams,
     avatar: {
       avatarStyle: avatar.avatarStyle,
       topType: avatar.topType,
@@ -205,47 +205,46 @@ const ProfilePanelEdit: React.FC<Props> = ({
         onRequestClose={() => {
           setIsOpen(false)
         }}
-        contentLabel="Modal"
+        contentLabel='Modal'
         style={customStyles}
       >
-        {avatars.map(element => {
-          return (
-            <button
-              className="profile-picture"
-              id="avatar"
-              onClick={() => {
-                const event = {
-                  target: {
-                    id: 'avatar',
-                    value: element
-                  }
+        {avatars.map((element, index) => (
+          <button
+            key={index}
+            className='profile-picture'
+            id='avatar'
+            onClick={() => {
+              const event = {
+                target: {
+                  id: 'avatar',
+                  value: element
                 }
-                handleChange(event)
-                setIsOpen(false)
-              }}
-            >
-              <Avatar
-                avatarStyle={element.avatarStyle}
-                topType={element.topType}
-                accessoriesType={element.accessoriesType}
-                hairColor={element.hairColor}
-                facialHairType={element.facialHairType}
-                clotheType={element.clotheType}
-                eyeType={element.eyeType}
-                eyebrowType={element.eyebrowType}
-                mouthType={element.mouthType}
-                skinColor={element.skinColor}
-              />
-            </button>
-          )
-        })}
+              }
+              handleChange(event)
+              setIsOpen(false)
+            }}
+          >
+            <Avatar
+              avatarStyle={element.avatarStyle}
+              topType={element.topType}
+              accessoriesType={element.accessoriesType}
+              hairColor={element.hairColor}
+              facialHairType={element.facialHairType}
+              clotheType={element.clotheType}
+              eyeType={element.eyeType}
+              eyebrowType={element.eyebrowType}
+              mouthType={element.mouthType}
+              skinColor={element.skinColor}
+            />
+          </button>
+        ))}
       </Modal>
       <form onSubmit={handleSubmit}>
         <Panel>
-          <div className="profile-cover"></div>
+          <div className='profile-cover' />
           <button
-            type="button"
-            className="profile-picture"
+            type='button'
+            className='profile-picture'
             onClick={() => {
               setIsOpen(true)
             }}
@@ -263,114 +262,114 @@ const ProfilePanelEdit: React.FC<Props> = ({
               skinColor={me.avatar.skinColor}
             />
           </button>
-          <div className="key-value">
-            <label htmlFor="name" className="key">
+          <div className='key-value'>
+            <label htmlFor='name' className='key'>
               Name:
             </label>
             <input
-              type="text"
-              className="value"
-              id="name"
+              type='text'
+              className='value'
+              id='name'
               defaultValue={name}
               onChange={handleChange}
             />
           </div>
 
-          <div className="key-value">
-            <label htmlFor="surname" className="key">
+          <div className='key-value'>
+            <label htmlFor='surname' className='key'>
               Surname:
             </label>
             <input
-              type="text"
-              className="value"
-              id="surname"
+              type='text'
+              className='value'
+              id='surname'
               defaultValue={surname}
               onChange={handleChange}
             />
           </div>
 
-          <div className="key-value">
-            <label htmlFor="jobTitle" className="key">
+          <div className='key-value'>
+            <label htmlFor='jobTitle' className='key'>
               Job title:
             </label>
             <input
-              type="text"
-              className="value"
-              id="jobTitle"
+              type='text'
+              className='value'
+              id='jobTitle'
               defaultValue={jobTitle}
               onChange={handleChange}
             />
           </div>
 
-          <div className="key-value">
-            <label htmlFor="company" className="key">
+          <div className='key-value'>
+            <label htmlFor='company' className='key'>
               Company:
             </label>
             <input
-              type="text"
-              className="value"
-              id="company"
+              type='text'
+              className='value'
+              id='company'
               defaultValue={company}
               onChange={handleChange}
             />
           </div>
 
-          <div className="separator"></div>
+          <div className='separator' />
 
-          <div className="key-value">
-            <label htmlFor="carrerPath" className="key">
+          <div className='key-value'>
+            <label htmlFor='carrerPath' className='key'>
               Carrer Path:
             </label>
             <select
-              id="carrerPath"
-              className="value"
+              id='carrerPath'
+              className='value'
               onChange={handleChange}
               defaultValue={me.carrerPath}
             >
-              <option value="Frontend">Frontend</option>
-              <option value="Backend">Backend</option>
-              <option value="Fullstack">Fullstack</option>
-              <option value="Software Engineer">Software Engineer</option>
+              <option value='Frontend'>Frontend</option>
+              <option value='Backend'>Backend</option>
+              <option value='Fullstack'>Fullstack</option>
+              <option value='Software Engineer'>Software Engineer</option>
             </select>
           </div>
-          <div className="key-value">
-            <label htmlFor="jobSituation" className="key">
+          <div className='key-value'>
+            <label htmlFor='jobSituation' className='key'>
               Job Situation:
             </label>
             <select
-              id="jobSituation"
-              className="value"
+              id='jobSituation'
+              className='value'
               onChange={handleChange}
               defaultValue={me.jobSituation}
             >
-              <option value="Open to new opportunity">
+              <option value='Open to new opportunity'>
                 Open to new opportunity
               </option>
-              <option value="Itensive searching">Itensive searching</option>
-              <option value="Not available to new opportunity">
+              <option value='Itensive searching'>Itensive searching</option>
+              <option value='Not available to new opportunity'>
                 Not available to new opportunity
               </option>
             </select>
           </div>
 
-          <div className="separator"></div>
+          <div className='separator' />
 
-          <div className="key-value">
-            <label htmlFor="selftPresentationLetter" className="key">
+          <div className='key-value'>
+            <label htmlFor='selftPresentationLetter' className='key'>
               Self presentation letter:
             </label>
           </div>
-          <div className="key-value">
+          <div className='key-value'>
             <textarea
-              className="value value-all"
-              id="presentationLetter"
+              className='value value-all'
+              id='presentationLetter'
               defaultValue={presentationLetter}
               onChange={handleChange}
             />
           </div>
         </Panel>
-        <button type="button">
-          <Button type="save" />
+        <button type='button'>
+          <Button type='save' />
         </button>
       </form>
     </Container>

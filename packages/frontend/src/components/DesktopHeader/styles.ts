@@ -6,8 +6,6 @@ import {
   FcPlus
 } from 'react-icons/fc'
 
-import Image from 'next/image'
-
 export const Container = styled.div`
   background: var(--color-header);
   padding: 0 30px;

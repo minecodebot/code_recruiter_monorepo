@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 import { FcSimCard } from 'react-icons/fc'
+
 export const Container = styled.div`
   padding-bottom: 12px;
 

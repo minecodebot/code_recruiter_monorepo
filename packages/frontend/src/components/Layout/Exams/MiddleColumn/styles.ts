@@ -1,5 +1,4 @@
-import styled, { css } from 'styled-components'
-import { FcSupport } from 'react-icons/fc'
+import styled from 'styled-components'
 
 export const Container = styled.div`
   /* height: 100vh; */

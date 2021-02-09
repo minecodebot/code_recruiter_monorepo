@@ -1,3 +1,4 @@
+print('Start #################################################################')
 print('Start creating databases')
 
 db = db.getSiblingDB('recruiterUser')
@@ -19,3 +20,4 @@ db.createUser({
 // })
 
 print('End of creation of databases')
+print('END #################################################################')

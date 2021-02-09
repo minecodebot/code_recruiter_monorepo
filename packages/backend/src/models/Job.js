@@ -1,6 +1,7 @@
-import { Schema, model } from 'mongoose'
+/* eslint-disable @typescript-eslint/no-var-requires */
+const mongoose = require('mongoose')
 
-const JobSchema = Schema({
+const JobSchema = mongoose.Schema({
   title: {
     type: String,
     required: true
@@ -31,4 +32,4 @@ const JobSchema = Schema({
   }
 })
 
-export default model('Job', JobSchema)
+module.exports = mongoose.model('Job', JobSchema)

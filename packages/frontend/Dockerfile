@@ -6,7 +6,7 @@ ENV PORT 3000
 WORKDIR /usr/src/app/frontend
 
 # Install dep
-COPY package.json ./
+COPY package*.json ./
 RUN yarn
 
 # Copy source files

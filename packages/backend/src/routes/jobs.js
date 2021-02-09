@@ -1,11 +1,12 @@
-import { Router } from 'express'
-const router = Router()
+/* eslint-disable @typescript-eslint/no-var-requires */
+const express = require('express')
+const router = express.Router()
 
-import { find, create, findOne, updateOne, deleteOne } from '../models/Job'
+const Job = require('../models/Job')
 
 router.get('/', async (req, res) => {
   try {
-    const jobs = await find()
+    const jobs = await Job.find()
     res.status(200).json(jobs)
   } catch (err) {
     res.status(400).json({ message: err })
@@ -16,7 +17,7 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const savedJob = await create({
+    const savedJob = await Job.create({
       title: req.body.title,
       shortDescription: req.body.shortDescription,
       longDescription: req.body.longDescription,
@@ -32,7 +33,7 @@ router.post('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const job = await findOne({ _id: req.params.id })
+    const job = await Job.findOne({ _id: req.params.id })
     res.status(200).json(job)
   } catch (err) {
     res.status(400).json({ message: err })
@@ -41,7 +42,7 @@ router.get('/:id', async (req, res) => {
 
 router.patch('/:id', async (req, res) => {
   try {
-    const job = await updateOne(
+    const job = await Job.updateOne(
       { _id: req.params.id },
       {
         $set: {
@@ -62,11 +63,11 @@ router.patch('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   try {
-    const job = await deleteOne({ _id: req.params.id })
+    const job = await Job.deleteOne({ _id: req.params.id })
     res.status(200).json(job)
   } catch (err) {
     res.status(400).json({ message: err })
   }
 })
 
-export default router
+module.exports = router

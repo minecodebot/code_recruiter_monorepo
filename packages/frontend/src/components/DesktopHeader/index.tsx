@@ -36,7 +36,7 @@ const Header: React.FC = () => {
       ) : (
         <Wrapper>
           <div
-            className="left homeIcon"
+            className='left homeIcon'
             onClick={() => {
               router.push('/')
             }}
@@ -44,7 +44,7 @@ const Header: React.FC = () => {
             <LinkedInIcon />
           </div>
           {session ? (
-            ? <div className="right">
+            <div className='right'>
               <nav>
                 <button
                   onClick={() => {
@@ -86,7 +86,7 @@ const Header: React.FC = () => {
                   />
                   <span>Me</span>
                 </button>
-                <a href="#" onClick={handleSignout} className="btn-signin">
+                <a href='#' onClick={handleSignout} className='btn-signin'>
                   Sign out
                 </a>
               </nav>
@@ -94,7 +94,7 @@ const Header: React.FC = () => {
           ) : (
             <>
               Not signed in <br />
-              <a href="#" onClick={handleSignin} className="btn-signin">
+              <a href='#' onClick={handleSignin} className='btn-signin'>
                 Sign in
               </a>
             </>

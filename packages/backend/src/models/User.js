@@ -1,6 +1,7 @@
-import { Schema, model } from 'mongoose'
+/* eslint-disable @typescript-eslint/no-var-requires */
+const mongoose = require('mongoose')
 
-const AvatarSchema = Schema({
+const AvatarSchema = mongoose.Schema({
   avatarStyle: {
     type: String,
     default: 'Circle'
@@ -51,7 +52,7 @@ const AvatarSchema = Schema({
   }
 })
 
-const UserSchema = Schema({
+const UserSchema = mongoose.Schema({
   name: {
     type: String,
     required: true
@@ -107,4 +108,4 @@ const UserSchema = Schema({
   }
 })
 
-export default model('User', UserSchema)
+module.exports = mongoose.model('User', UserSchema)

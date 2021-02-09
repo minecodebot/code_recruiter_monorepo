@@ -1,8 +1,8 @@
 import React from 'react'
 import Head from 'next/head'
-import Layout from '../../../components/Layout'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
+import Layout from '../../../components/Layout'
 import { userInterface } from '../../../components/Interface'
 import api from '../../../services/api'
 
@@ -10,7 +10,7 @@ export interface Props {
   user: userInterface
 }
 
-const Trainings: React.FC<Props> = ({ user }) => {
+const Trainings: React.FC<Props> = ({ user }: Props) => {
   const { isFallback } = useRouter()
 
   return (
@@ -25,12 +25,10 @@ const Trainings: React.FC<Props> = ({ user }) => {
 
 export default Trainings
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: [],
-    fallback: 'blocking'
-  }
-}
+export const getStaticPaths: GetStaticPaths = async () => ({
+  paths: [],
+  fallback: 'blocking'
+})
 
 export const getStaticProps: GetStaticProps = async context => {
   const { id } = context.params

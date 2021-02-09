@@ -1,6 +1,0 @@
-{
-  "name": "@monorepo/database",
-  "version": "1.0.0",
-  "main": "initdb.js",
-  "license": "MIT"
-}

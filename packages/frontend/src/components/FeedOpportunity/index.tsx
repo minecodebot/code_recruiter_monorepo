@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Image from 'next/image'
 import Panel from '../Panel'
 import {
   Container,
@@ -33,44 +32,42 @@ const FeedOpportunity: React.FC<Props> = ({
   competences,
   exam,
   trainings
-}) => {
+}: Props) => {
   const [fullOpportunity, setFullOpportunity] = useState(false)
   return (
     <Panel>
       <Container>
-        <Row className="heading">
-          <Avatar src="/81RtXfT.jpg" alt="Rocketseat2" width="48" height="48" />
+        <Row className='heading'>
+          <Avatar src='/81RtXfT.jpg' alt='Rocketseat2' width='48' height='48' />
           <Column>
             <h3>{title}</h3>
             <h4>{company}</h4>
             <time>{job_date}</time>
           </Column>
         </Row>
-        <Row className="description">
+        <Row className='description'>
           <Column>
             {fullOpportunity ? (
               <>
-                <span className="title">Description</span>
+                <span className='title'>Description</span>
                 <p>{long_description}</p>
-                <div className="separator"></div>
+                <div className='separator' />
                 <Row>
                   <Column>
-                    {competences.map(competence => {
-                      return (
-                        <p className="tag">
-                          <span>
-                            <HashtagIconCertified />
-                            {competence}
-                          </span>
-                        </p>
-                      )
-                    })}
+                    {competences.map((competence, index) => (
+                      <p className='tag' key={index}>
+                        <span>
+                          <HashtagIconCertified />
+                          {competence}
+                        </span>
+                      </p>
+                    ))}
                   </Column>
                 </Row>
               </>
             ) : (
               <>
-                <span className="title">Short Description</span>
+                <span className='title'>Short Description</span>
                 <p>{short_description}</p>
               </>
             )}
@@ -81,9 +78,9 @@ const FeedOpportunity: React.FC<Props> = ({
           <Separator />
         </Row>
 
-        <Row className="actions">
-          <div className="buttons">
-            <div className="left">
+        <Row className='actions'>
+          <div className='buttons'>
+            <div className='left'>
               {fullOpportunity ? (
                 <button
                   onClick={() => {
@@ -104,11 +101,11 @@ const FeedOpportunity: React.FC<Props> = ({
                 </button>
               )}
             </div>
-            <div className="right">
-              <Button url={`/exam/code/${exam}`} type="exam" />
+            <div className='right'>
+              <Button url={`/exam/code/${exam}`} type='exam' />
               <Button
                 url={`/trainings/code/${trainings.join('/')}`}
-                type="training"
+                type='training'
               />
             </div>
           </div>

@@ -1,10 +1,9 @@
 import React from 'react'
 import Head from 'next/head'
-import Layout from '../../../components/Layout'
-// import meData from '../../../data/me/index.json'
-import trainingsData from '../../../data/trainings/index.json'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
+import Layout from '../../../components/Layout'
+import trainingsData from '../../../data/trainings/index.json'
 import { userInterface, trainingInterface } from '../../../components/Interface'
 import api from '../../../services/api'
 
@@ -13,7 +12,7 @@ export interface Props {
   trainings: trainingInterface[]
 }
 
-const Trainings: React.FC<Props> = ({ me, trainings }) => {
+const Trainings: React.FC<Props> = ({ me, trainings }: Props) => {
   const { isFallback } = useRouter()
 
   return (
@@ -21,19 +20,17 @@ const Trainings: React.FC<Props> = ({ me, trainings }) => {
       <Head>
         <title>Job Search Plataform - Trainings</title>
       </Head>
-      <Layout isLoading={isFallback} me={me} trainings={trainings} />
+      <Layout isLoading={isFallback} user={me} trainings={trainings} />
     </>
   )
 }
 
 export default Trainings
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: [],
-    fallback: 'blocking'
-  }
-}
+export const getStaticPaths: GetStaticPaths = async () => ({
+  paths: [],
+  fallback: 'blocking'
+})
 
 export const getStaticProps: GetStaticProps = async context => {
   const { id } = context.params
@@ -42,9 +39,9 @@ export const getStaticProps: GetStaticProps = async context => {
   return {
     props: {
       me: meData.data,
-      trainings: trainingsData.filter(training => {
-        return id.includes(training.id.toString())
-      })
+      trainings: trainingsData.filter(training =>
+        id.includes(training.id.toString())
+      )
     },
     revalidate: 20
   }

@@ -26,6 +26,7 @@ export interface userInterface {
 }
 
 export interface postInterface {
+  id: number
   title: string
   company: string
   job_date: string
@@ -39,13 +40,20 @@ export interface postInterface {
 export interface trainingInterface {
   id: number
   title: string
-  level: string
+  level: number
 }
 
 export interface examInterface {
+  id: number
   title: string
+  level: number
+  date: Date
   description: string
-  date: string
-  level: string
   status: string
+}
+
+export interface competenceInterface {
+  id: number
+  title: string
+  level: number
 }

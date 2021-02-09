@@ -1,11 +1,12 @@
-import { Router } from 'express'
-const router = Router()
+/* eslint-disable @typescript-eslint/no-var-requires */
+const express = require('express')
+const router = express.Router()
 
-import { find, create, findOne, updateOne, deleteOne } from '../models/User'
+const User = require('../models/User')
 
 router.get('/', async (req, res) => {
   try {
-    const users = await find()
+    const users = await User.find()
     res.status(200).json(users)
   } catch (err) {
     res.status(400).json({ message: err })
@@ -16,7 +17,7 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const savedUser = await create({
+    const savedUser = await User.create({
       name: req.body.name,
       surname: req.body.surname,
       email: req.body.email
@@ -29,7 +30,7 @@ router.post('/', async (req, res) => {
 
 router.get('/:email', async (req, res) => {
   try {
-    const user = await findOne({ email: req.params.email })
+    const user = await User.findOne({ email: req.params.email })
     res.status(200).json(user)
   } catch (err) {
     res.status(400).json({ message: err })
@@ -38,7 +39,7 @@ router.get('/:email', async (req, res) => {
 
 router.put('/:email', async (req, res) => {
   try {
-    const user = await updateOne(
+    const user = await User.updateOne(
       { email: req.params.email },
       {
         $set: {
@@ -61,11 +62,11 @@ router.put('/:email', async (req, res) => {
 
 router.delete('/:email', async (req, res) => {
   try {
-    const user = await deleteOne({ email: req.params.email })
+    const user = await User.deleteOne({ email: req.params.email })
     res.status(200).json(user)
   } catch (err) {
     res.status(400).json({ message: err })
   }
 })
 
-export default router
+module.exports = router
