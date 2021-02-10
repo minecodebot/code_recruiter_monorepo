@@ -46,6 +46,7 @@ services:
     volumes:
       - ./packages/backend:/usr/src/app/backend
       - /usr/src/app/backend/node_modules
+      - /usr/src/app/backend/.next
     ports:
       - 3000:3000
     environment:
