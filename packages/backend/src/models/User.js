@@ -53,6 +53,11 @@ const AvatarSchema = mongoose.Schema({
 })
 
 const UserSchema = mongoose.Schema({
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  },
   name: {
     type: String,
     required: true
@@ -60,15 +65,6 @@ const UserSchema = mongoose.Schema({
   surname: {
     type: String,
     required: true
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  jobTitle: {
-    type: String,
-    default: ''
   },
   company: {
     type: String,
@@ -82,9 +78,17 @@ const UserSchema = mongoose.Schema({
     type: String,
     default: ''
   },
+  jobTitle: {
+    type: String,
+    default: ''
+  },
   presentationLetter: {
     type: String,
     default: ''
+  },
+  avatar: {
+    type: AvatarSchema,
+    default: () => ({})
   },
   competences: {
     type: [Number],
@@ -102,9 +106,9 @@ const UserSchema = mongoose.Schema({
     type: [Number],
     default: []
   },
-  avatar: {
-    type: AvatarSchema,
-    default: () => ({})
+  date: {
+    type: Date,
+    default: Date.now
   }
 })
 

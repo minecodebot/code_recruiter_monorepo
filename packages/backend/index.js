@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 require('dotenv/config')
+const listEndpoints = require('express-list-endpoints')
 
 const app = express()
 app.use(bodyParser.json())
@@ -20,9 +21,18 @@ app.use('/jobs', jobsRoute)
 const usersRoute = require('./src/routes/users')
 app.use('/users', usersRoute)
 
+const examsRoute = require('./src/routes/exams')
+app.use('/exams', examsRoute)
+
+const competencesRoute = require('./src/routes/competences')
+app.use('/competences', competencesRoute)
+
+const trainingsRoute = require('./src/routes/trainings')
+app.use('/trainings', trainingsRoute)
+
 // Routes
 app.get('/', (req, res) => {
-  res.send('We are on home page!')
+  res.send(listEndpoints(app))
 })
 
 // How to we start listening to the server
