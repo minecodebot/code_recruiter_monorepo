@@ -10,6 +10,7 @@ services:
       MONGO_INITDB_DATABASE: recruiterUser
     volumes:
       - ./packages/database/initdb.js:/docker-entrypoint-initdb.d/initdb.js
+      # - ./packages/database/data:/data/db
     ports:
       - 27017:27017
     restart: always
@@ -38,15 +39,15 @@ services:
     depends_on:
       - code_recruiter_backend
     build:
-      context: packages/frontend
+      context: ./packages/frontend
       dockerfile: Dockerfile
     container_name: code_recruiter_frontend
     hostname: code_recruiter_frontend
-    env_file: packages/frontend/.env
+    env_file: ./packages/frontend/.env
     volumes:
-      - ./packages/backend:/usr/src/app/backend
-      - /usr/src/app/backend/node_modules
-      - /usr/src/app/backend/.next
+      - ./packages/frontend:/usr/src/app/frontend
+      - /usr/src/app/frontend/node_modules
+      - /usr/src/app/frontend/.next
     ports:
       - 3000:3000
     environment:
